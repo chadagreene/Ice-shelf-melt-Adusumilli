@@ -1,0 +1,298 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>melt_data_adusumilli documentation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-22"><meta name="DC.source" content="melt_data_adusumilli_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>melt_data_adusumilli</tt> documentation</h1><!--introduction--><p><tt>melt_data_adusumilli</tt> loads ice shelf melt rate data from <a href="https://library.ucsd.edu/dc/object/bb0448974g">Adusumilli et al., 2020</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Requirements</a></li><li><a href="#4">Example 1:</a></li><li><a href="#6">Example 2: Time series data</a></li><li><a href="#7">Map of melt rate trends</a></li><li><a href="#8">Plot a time series of meltwater production</a></li><li><a href="#11">Citing this data</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[M,x,y] = melt_data_adusumilli
+[M,x,y,t] = melt_data_adusumilli('timeseries')</pre><h2 id="2">Description</h2><p><tt>[M,x,y] = melt_data_adusumilli</tt> loads the 500 m resolution <tt>w_b</tt> mosaic of basal meltrates (m/yr) that spans 2010-2018. Missing data are filled with the w_b_interp variable, which assumes a depth-dependent melt rate that was calculated separately for each ice shelf. Output variables <tt>x</tt> and <tt>y</tt> are in polar stereographic (ps71) meters.</p><p><tt>[M,x,y,t] = melt_data_adusumilli('timeseries')</tt> loads the 10 km resolution, quarterly (four times a year) data cube of surface elevation anomalies from 1992 to 2018, then converts to melt rates. It's important to note that Adusumilli's dataset does not actually contain a timeseries of melt rates, so this function uses the ITS_LIVE velocity mosaic and BedMachine ice thickness to account for divergence (which I'm calculating as constant through time despite evidence to the contrary). The output variable <tt>t</tt> is in Matlab's datenum format, which is the number of days since the strike of midnight of the year zero. Note that the timeseries calculation does take some time (about four seconds on my laptop).</p><h2 id="3">Requirements</h2><div><ul><li>The 500 m resolution static grid requires Antarctic iceshelf melt rate data which can be found at the <a href="https://library.ucsd.edu/dc/object/bb0448974g">UCSD repository</a> under the Components heading.</li><li>The timeseries data requires the Antarctic iceshelf height change data from the <a href="https://library.ucsd.edu/dc/object/bb0448974g">UCSD repository</a> under the Components heading. But the time series does not actually contain melt rates. To convert ice shelf surface heights to melt rates, this function also requires:</li><li><a href="https://www.mathworks.com/matlabcentral/fileexchange/69159-bedmachine">BedMachine functions</a>,</li><li><a href="https://nsidc.org/data/nsidc-0756">BedMachine data</a>,</li><li><a href="https://github.com/chadagreene/ITS_LIVE">ITS_LIVE functions</a>,</li><li><a href="https://its-live.jpl.nasa.gov/">ITS_LIVE velocity mosaic data</a>, and</li><li><a href="https://github.com/chadagreene/CDT">Climate Data Tools for Matlab</a>.</li></ul></div><h2 id="4">Example 1:</h2><p>Make a map of basal melt rates. This example uses <tt>imagescn</tt> from the Climate Data Toolbox (Greene et al., 2019), which is just a version of <tt>imagesc</tt> that makes NaNs transprent. Also the <tt>bedmachine</tt> function draws gounding lines for context, and <tt>cmocean</tt> sets a divergent colormap.</p><pre class="codeinput">[M,x,y] = melt_data_adusumilli;
+
+figure
+imagescn(x,y,M)
+bedmachine <span class="comment">% draws gounding lines and coast lines</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'basal melt rates'</span>)
+caxis([-1 1]*10)
+cmocean <span class="string">balance</span> <span class="comment">% colormap</span>
+</pre><img vspace="5" hspace="5" src="melt_data_adusumilli_documentation_01.png" alt=""> <p>Zoom in on the Amundsen Sea, and put a MODIS Mosaic of Antarctica under there:</p><pre class="codeinput">mapzoomps(<span class="string">'amundsen sea'</span>,<span class="string">'mapwidth'</span>,1200,<span class="string">'inset'</span>,<span class="string">'sw'</span>,<span class="string">'frame'</span>,<span class="string">'off'</span>)
+modismoaps(<span class="string">'contrast'</span>,<span class="string">'white'</span>)
+scalebarps(<span class="string">'color'</span>,<span class="string">'w'</span>,<span class="string">'location'</span>,<span class="string">'se'</span>)
+axis <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="melt_data_adusumilli_documentation_02.png" alt=""> <h2 id="6">Example 2: Time series data</h2><p>The time series data is given at 10 km resolution, at 3 month intervals, and it takes a few seconds to load and calculate. I should reiterate here that the melt rate time series results from my own calculations applied to the Adusumilli data--My conversion of the surface elevation anomaly time series into basal melt rates relies on the assumption of constant velocity and constant ice thickness, which neglects any effects of time-varying divergence. Use with caution.</p><p>Get the melt rate time series and plot the mean melt rate for the period 2000 to 2015:</p><pre class="codeinput"><span class="comment">% Load the data:</span>
+[M,x,y,t] = melt_data_adusumilli(<span class="string">'timeseries'</span>);
+
+<span class="comment">% Get indices of dates of interest:</span>
+ind = t&gt;datenum(<span class="string">'jan 1, 2000'</span>) &amp; t&lt;datenum(<span class="string">'jan 1, 2015'</span>);
+
+<span class="comment">% Calculate the mean melt rate for times of interest:</span>
+M_mean = mean(M(:,:,ind),3);
+
+figure
+imagescn(x,y,M_mean)
+bedmachine
+caxis([-1 1]*10)
+cb = colorbar;
+ylabel(cb,<span class="string">'mean melt rate 2000-2015'</span>)
+cmocean <span class="string">bal</span>
+</pre><img vspace="5" hspace="5" src="melt_data_adusumilli_documentation_03.png" alt=""> <h2 id="7">Map of melt rate trends</h2><p>Using the data we loaded above, use the same philosophy, but calculate the trend in melt rate instead of the mean. Here we're using the <tt>trend</tt> function from the Climate Data Toolbox for Matlab (Greene et al., 2019). Note that we have to divide time by 365 to convert datenum format (serial days) into units that the trend function will then spit out as meters of melt per year.</p><pre class="codeinput">M_trend = trend(M(:,:,ind),t(ind)/365);
+
+figure
+imagescn(x,y,M_trend)
+bedmachine
+caxis([-1 1]*0.5)
+cb = colorbar;
+ylabel(cb,<span class="string">'trend in melt rate 2000-2015 (m/yr^2)'</span>)
+cmocean <span class="string">bal</span>
+</pre><img vspace="5" hspace="5" src="melt_data_adusumilli_documentation_04.png" alt=""> <h2 id="8">Plot a time series of meltwater production</h2><p>Perhaps you want to know how much meltwater was produced by Getz Ice Shelf each year since 1992. To get a time series of meltwater for a specified area, first you must define a mask. Here we can use the <tt>isiceshelf</tt> function from Antarctic Mapping Tools to get the Getz Ice Shelf mask.</p><p>Start by using <tt>meshgrid</tt> to make a an X,Y grid that will have coordinates for each grid point, then use <tt>isiceshelf</tt> to determine which of those grid points fall within the outline of Getz.</p><pre class="codeinput">[X,Y] = meshgrid(x,y);
+
+mask = isiceshelf(X,Y,<span class="string">'Getz'</span>);
+
+figure
+imagescn(x,y,mask)
+bedmachine <span class="comment">% plots coastlines for context</span>
+</pre><img vspace="5" hspace="5" src="melt_data_adusumilli_documentation_05.png" alt=""> <p>Perfect. Above we have a yellow pixel for each of the 10 km grid cells inside the boundaries of Getz Ice Shelf.</p><p>The <tt>local</tt> function in the Climate Data Toolbox is the easiest way to use that mask to make a time series. The only hard part in this process will be converting ice melt rate (m/yr) into total mass rate (Gt/yr). To do that, multiply each grid cell by its area (10e3^2 meters), which gives volume of ice per year, per grid cell. Multiply volume by the density of ice (917 kg/m^3) to then get mass rate in kg/yr. Multiply that by 1e-12 to convert kg/yr to Gt/yr.</p><pre class="codeinput">massrate_getz = local(M,mask,@sum,<span class="string">'omitnan'</span>)*10e3^2*917*1e-12;
+
+figure
+plot(t,movmean(massrate_getz,4))
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+ylabel(<span class="string">'Getz meltwater production (Gt/yr)'</span>)
+</pre><img vspace="5" hspace="5" src="melt_data_adusumilli_documentation_06.png" alt=""> <p>The numbers above are in line with the 145 Gt/yr reported by &lt;https://science.sciencemag.org/content/341/6143/266/tab-figures-data Rignot et al., 2013).</p><h2 id="11">Citing this data</h2><p>Please cite Susheel's dataset if you use this data! Also, this function does operate on the data, so if you don't mind, please also cite Antarctic Mapping Tools.</p><p>Adusumilli, Susheel; Fricker, Helen A.; Medley, Brooke C.; Padman, Laurie; Siegfried, Matthew R. (2020). Data from: Interannual variations in meltwater input to the Southern Ocean from Antarctic ice shelves. UC San Diego Library Digital Collections. <a href="https://doi.org/10.6075/J04Q7SHT">https://doi.org/10.6075/J04Q7SHT</a></p><p>Greene, C. A., Gwyther, D. E., &amp; Blankenship, D. D. Antarctic Mapping Tools for Matlab. Computers &amp; Geosciences. 104 (2017) pp.151-157. <a href="http://dx.doi.org/10.1016/j.cageo.2016.08.003">http://dx.doi.org/10.1016/j.cageo.2016.08.003</a></p><h2 id="12">Author Info</h2><p>This function and supporting documentation were written by Chad A. Greene of NASA Jet Propulsion Laboratory, October 2020.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |melt_data_adusumilli| documentation
+% |melt_data_adusumilli| loads ice shelf melt rate data from <https://library.ucsd.edu/dc/object/bb0448974g 
+% Adusumilli et al., 2020>.
+% 
+%% Syntax
+% 
+%  [M,x,y] = melt_data_adusumilli
+%  [M,x,y,t] = melt_data_adusumilli('timeseries')
+% 
+%% Description 
+% 
+% |[M,x,y] = melt_data_adusumilli| loads the 500 m resolution |w_b| mosaic of
+% basal meltrates (m/yr) that spans 2010-2018. Missing data are filled with
+% the w_b_interp variable, which assumes a depth-dependent melt rate that was
+% calculated separately for each ice shelf. Output variables |x| and |y| are in 
+% polar stereographic (ps71) meters. 
+% 
+% |[M,x,y,t] = melt_data_adusumilli('timeseries')| loads the 10 km resolution, 
+% quarterly (four times a year) data cube of surface elevation anomalies from
+% 1992 to 2018, then converts to melt rates. It's important to note that Adusumilli's 
+% dataset does not actually contain a timeseries of melt rates, so this function
+% uses the ITS_LIVE velocity mosaic and BedMachine ice thickness to account for 
+% divergence (which I'm calculating as constant through time despite evidence
+% to the contrary). The output variable |t| is in Matlab's datenum format, which 
+% is the number of days since the strike of midnight of the year zero. Note 
+% that the timeseries calculation does take some time (about four seconds on my laptop).
+% 
+%% Requirements 
+% * The 500 m resolution static grid requires Antarctic iceshelf melt rate data 
+% which can be found at the <https://library.ucsd.edu/dc/object/bb0448974g UCSD
+% repository> under the Components heading. 
+% * The timeseries data requires the Antarctic iceshelf height change data 
+% from the <https://library.ucsd.edu/dc/object/bb0448974g UCSD
+% repository> under the Components heading. But the time series does not actually
+% contain melt rates. To convert ice shelf surface heights to melt rates, this function
+% also requires: 
+% * <https://www.mathworks.com/matlabcentral/fileexchange/69159-bedmachine BedMachine functions>, 
+% * <https://nsidc.org/data/nsidc-0756 BedMachine data>, 
+% * <https://github.com/chadagreene/ITS_LIVE ITS_LIVE functions>, 
+% * <https://its-live.jpl.nasa.gov/ ITS_LIVE velocity mosaic data>, and 
+% * <https://github.com/chadagreene/CDT Climate Data Tools for Matlab>.
+% 
+%% Example 1: 
+% Make a map of basal melt rates. This example uses |imagescn| from the 
+% Climate Data Toolbox (Greene et al., 2019), which is just a version of |imagesc| that makes 
+% NaNs transprent. Also the |bedmachine| function draws gounding lines
+% for context, and |cmocean| sets a divergent colormap. 
+
+[M,x,y] = melt_data_adusumilli;
+
+figure
+imagescn(x,y,M) 
+bedmachine % draws gounding lines and coast lines
+cb = colorbar; 
+ylabel(cb,'basal melt rates') 
+caxis([-1 1]*10)
+cmocean balance % colormap
+
+%% 
+% Zoom in on the Amundsen Sea, and put a MODIS Mosaic of Antarctica under 
+% there: 
+
+mapzoomps('amundsen sea','mapwidth',1200,'inset','sw','frame','off')
+modismoaps('contrast','white') 
+scalebarps('color','w','location','se')
+axis off 
+
+%% Example 2: Time series data
+% The time series data is given at 10 km resolution, at 3 month intervals, and
+% it takes a few seconds to load and calculate. I should reiterate here that
+% the melt rate time series results from my own calculations applied to the 
+% Adusumilli dataREPLACE_WITH_DASH_DASHMy conversion of the surface elevation anomaly time series 
+% into basal melt rates relies on the assumption of constant velocity and constant
+% ice thickness, which neglects any effects of time-varying divergence. Use with 
+% caution. 
+% 
+% Get the melt rate time series and plot the mean melt rate for the period 
+% 2000 to 2015: 
+
+% Load the data: 
+[M,x,y,t] = melt_data_adusumilli('timeseries'); 
+
+% Get indices of dates of interest: 
+ind = t>datenum('jan 1, 2000') & t<datenum('jan 1, 2015'); 
+
+% Calculate the mean melt rate for times of interest: 
+M_mean = mean(M(:,:,ind),3); 
+
+figure
+imagescn(x,y,M_mean)
+bedmachine 
+caxis([-1 1]*10)
+cb = colorbar; 
+ylabel(cb,'mean melt rate 2000-2015')
+cmocean bal 
+
+%% Map of melt rate trends
+% Using the data we loaded above, use the same philosophy, but calculate the 
+% trend in melt rate instead of the mean. Here we're using the |trend| function 
+% from the Climate Data Toolbox for Matlab (Greene et al., 2019). Note that
+% we have to divide time by 365 to convert datenum format (serial days) into
+% units that the trend function will then spit out as meters of melt per year. 
+
+M_trend = trend(M(:,:,ind),t(ind)/365); 
+
+figure
+imagescn(x,y,M_trend)
+bedmachine 
+caxis([-1 1]*0.5)
+cb = colorbar; 
+ylabel(cb,'trend in melt rate 2000-2015 (m/yr^2)')
+cmocean bal 
+
+%% Plot a time series of meltwater production 
+% Perhaps you want to know how much meltwater was produced by Getz Ice Shelf 
+% each year since 1992. To get a time series of meltwater for a specified 
+% area, first you must define a mask. Here we can use the |isiceshelf| function 
+% from Antarctic Mapping Tools to get the Getz Ice Shelf mask. 
+% 
+% Start by using |meshgrid| to make a an X,Y grid that will have coordinates 
+% for each grid point, then use |isiceshelf| to determine which of those grid
+% points fall within the outline of Getz. 
+
+[X,Y] = meshgrid(x,y); 
+
+mask = isiceshelf(X,Y,'Getz'); 
+
+figure
+imagescn(x,y,mask)
+bedmachine % plots coastlines for context 
+
+%% 
+% Perfect. Above we have a yellow pixel for each of the 10 km grid cells inside
+% the boundaries of Getz Ice Shelf. 
+% 
+% The |local| function in the Climate Data Toolbox is the easiest way to 
+% use that mask to make a time series. The only hard part in this process 
+% will be converting ice melt rate (m/yr) into total mass rate (Gt/yr). To 
+% do that, multiply each grid cell by its area (10e3^2 meters), which gives 
+% volume of ice per year, per grid cell. Multiply volume by the density of ice 
+% (917 kg/m^3) to then get mass rate in kg/yr. Multiply that by 1e-12 to 
+% convert kg/yr to Gt/yr. 
+
+massrate_getz = local(M,mask,@sum,'omitnan')*10e3^2*917*1e-12;
+
+figure
+plot(t,movmean(massrate_getz,4))
+axis tight
+box off
+datetick('x','keeplimits')
+ylabel('Getz meltwater production (Gt/yr)') 
+
+%% 
+% The numbers above are in line with the 145 Gt/yr reported by <https://science.sciencemag.org/content/341/6143/266/tab-figures-data
+% Rignot et al., 2013). 
+
+%% Citing this data
+% Please cite Susheel's dataset if you use this data! Also, this function does operate on
+% the data, so if you don't mind, please also cite Antarctic Mapping Tools. 
+% 
+% Adusumilli, Susheel; Fricker, Helen A.; Medley, Brooke C.; Padman, Laurie; Siegfried, 
+% Matthew R. (2020). Data from: Interannual variations in meltwater input to the Southern
+% Ocean from Antarctic ice shelves. UC San Diego Library Digital Collections.
+% <https://doi.org/10.6075/J04Q7SHT>
+% 
+% Greene, C. A., Gwyther, D. E., & Blankenship, D. D. Antarctic Mapping Tools for Matlab. 
+% Computers & Geosciences. 104 (2017) pp.151-157. 
+% <http://dx.doi.org/10.1016/j.cageo.2016.08.003>
+% 
+%% Author Info
+% This function and supporting documentation were written by Chad A. Greene
+% of NASA Jet Propulsion Laboratory, October 2020. 
+##### SOURCE END #####
+--></body></html>
