@@ -8,7 +8,7 @@ The easiest way to see how to work with these functions is to make sure Matlab c
 
     showdemo melt_data_adusumilli_documentation
 
-into the Matlab command window. Or just find the `melt_data_adusumilli_documentation.html` file and open it in a web browser. Same goes for `melt_data_adusumilli_documentation`.
+into the Matlab command window. Or just find the `melt_data_adusumilli_documentation.html` file and open it in a web browser. Same goes for `melt_interp_adusumilli_documentation`.
 
 # Requirements 
 All you need is the data and AMT. 
