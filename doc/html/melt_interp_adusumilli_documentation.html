@@ -1,0 +1,262 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>melt_interp_adusumilli documentation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-24"><meta name="DC.source" content="melt_interp_adusumilli_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>melt_interp_adusumilli</tt> documentation</h1><!--introduction--><p><tt>melt_interp_adusumilli</tt> interpolates ice shelf melt rate data from <a href="https://library.ucsd.edu/dc/object/bb0448974g">Adusumilli et al., 2020</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Requirements</a></li><li><a href="#4">Example 1a: A grid</a></li><li><a href="#5">Example 1b: Antialiased grid</a></li><li><a href="#7">Example 2: Melt rates along a profile</a></li><li><a href="#11">Citing this data</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>mi = melt_interp_adusumilli(lati,loni)
+mi = melt_interp_adusumilli(xi,yi)
+mi = melt_interp_adusumilli(...,'antialias',wavelength)</pre><h2 id="2">Description</h2><p><tt>mi = melt_interp_adusumilli(lati,loni)</tt> interpolates the composite melt rates (representing the years 2010-2018) at the geographic locations <tt>lati,loni</tt>.</p><p><tt>mi = melt_interp_adusumilli(xi,yi)</tt> as above, but for the query points <tt>xi,yi</tt> in south polar stereographic meters.</p><p><tt>mi = melt_interp_adusumilli(...,'antialias',wavelength)</tt> performs spatial antialiasing before interpolation. This option is provided because the raw data is distributed at 500 m resolution, but you may be interpolating to a coarser resolution grid. For antialiasing, a decent rule of thumb is to lowpass filter to a wavelength of twice the resolution of the query grid. In other words, if you are interpolating to a 3 km grid, use <tt>6000</tt> as the <tt>wavelength</tt> value to meet Nyquist. The antialiasing option uses the <tt>filt2</tt> function from Climate Data Toolbox, and may take a couple seconds to compute.</p><h2 id="3">Requirements</h2><div><ul><li>The 500 m resolution static grid requires Antarctic iceshelf melt rate data which can be found at the <a href="https://library.ucsd.edu/dc/object/bb0448974g">UCSD repository</a> under the Components heading.</li><li>The timeseries data requires the Antarctic iceshelf height change data from the <a href="https://library.ucsd.edu/dc/object/bb0448974g">UCSD repository</a> under the Components heading. But the time series does not actually contain melt rates.</li><li>To anti-alias ice shelf before interpolation , this function also requires (<a href="https://github.com/chadagreene/CDT">Climate Data Tools for Matlab</a>.</li></ul></div><h2 id="4">Example 1a: A grid</h2><p>Suppose you want a 5 km resolution grid of melt rates for Getz Ice Shelf. We'll start by defining a 600 km wide grid, at 5 km resolution, with the <tt>psgrid</tt> function rom Antarctic Mapping Tools.</p><pre class="codeinput"><span class="comment">% Define a grid:</span>
+[lat,lon] = psgrid(<span class="string">'Getz Ice Shelf'</span>,600,5);
+
+<span class="comment">% Interpolate:</span>
+m = melt_interp_adusumilli(lat,lon);
+
+<span class="comment">% Map it:</span>
+figure
+pcolorps(lat,lon,m)
+axis <span class="string">tight</span> <span class="string">off</span>
+bedmachine <span class="comment">% draws a coastline for context</span>
+modismoaps(<span class="string">'contrast'</span>,<span class="string">'white'</span>) <span class="comment">% background image</span>
+cb = colorbar;
+caxis([-1 1]*10)
+cmocean <span class="string">bal</span>
+scalebarps(<span class="string">'color'</span>,<span class="string">'w'</span>)
+</pre><img vspace="5" hspace="5" src="melt_interp_adusumilli_documentation_01.png" alt=""> <h2 id="5">Example 1b: Antialiased grid</h2><p>Now do the same as above, but apply a 10 km lowpass filter to antialias before interpolating from the 500 m grid to the 5 km grid. The antialiasing filter takes about 10 seconds on my laptop.</p><pre class="codeinput"><span class="comment">% Interpolate:</span>
+ma = melt_interp_adusumilli(lat,lon,<span class="string">'antialias'</span>,10e3);
+
+<span class="comment">% Map it:</span>
+figure
+pcolorps(lat,lon,ma)
+axis <span class="string">tight</span> <span class="string">off</span>
+bedmachine <span class="comment">% draws a coastline for context</span>
+modismoaps(<span class="string">'contrast'</span>,<span class="string">'white'</span>) <span class="comment">% background image</span>
+cb = colorbar;
+caxis([-1 1]*10)
+cmocean <span class="string">bal</span>
+scalebarps(<span class="string">'color'</span>,<span class="string">'w'</span>)
+</pre><img vspace="5" hspace="5" src="melt_interp_adusumilli_documentation_02.png" alt=""> <p>The antialiased map above looks very similar to the aliased version, albeit with a tiny bit less noise. My personal take is that the proper way to interpolate from a high-resolution grid to a low-resolution grid is to perform antialiasing; however, if my results change dramatically with versus without antialiasing, my findings probably aren't that meaningful.</p><h2 id="7">Example 2: Melt rates along a profile</h2><p>Let's look at the melt rate along a flowline of Pine Island Glacier. Start with this map for context:</p><pre class="codeinput">figure
+mapzoomps <span class="string">'pine island glacier'</span>
+itslive_imagesc <span class="comment">% plots ice speed</span>
+</pre><img vspace="5" hspace="5" src="melt_interp_adusumilli_documentation_03.png" alt=""> <p>After plotting the map above, I used the <tt>coord</tt> function to get the coordinates (-1581526,-196704) of a grounded spot in the main trunk of PIG. I'll use that as a starting point to make a flowline:</p><pre class="codeinput">[xi,yi,di] = itslive_flowline(-1581526,-196704);
+
+hold <span class="string">on</span>
+plot(xi,yi,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="melt_interp_adusumilli_documentation_04.png" alt=""> <pre class="codeinput">figure
+bedmachine_profile(xi,yi)
+axis([900 995 -1400 300])
+</pre><img vspace="5" hspace="5" src="melt_interp_adusumilli_documentation_05.png" alt=""> <pre class="codeinput"><span class="comment">% Get basal meltrates along the flowline</span>
+mi = melt_interp_adusumilli(xi,yi);
+
+bi = bedmachine_interp(<span class="string">'base'</span>,xi,yi);
+
+hold <span class="string">on</span>
+scatter(di{1},bi,30,mi,<span class="string">'filled'</span>)
+cb = colorbar;
+ylabel(cb,<span class="string">'melt rate (m/yr)'</span>)
+cmocean <span class="string">thermal</span> <span class="comment">% colormap</span>
+</pre><img vspace="5" hspace="5" src="melt_interp_adusumilli_documentation_06.png" alt=""> <h2 id="11">Citing this data</h2><p>Please cite Susheel's dataset if you use this data! Also, this function does operate on the data, so if you don't mind, please also cite Antarctic Mapping Tools.</p><p>Adusumilli, Susheel; Fricker, Helen A.; Medley, Brooke C.; Padman, Laurie; Siegfried, Matthew R. (2020). Data from: Interannual variations in meltwater input to the Southern Ocean from Antarctic ice shelves. UC San Diego Library Digital Collections. <a href="https://doi.org/10.6075/J04Q7SHT">https://doi.org/10.6075/J04Q7SHT</a></p><p>Greene, C. A., Gwyther, D. E., &amp; Blankenship, D. D. Antarctic Mapping Tools for Matlab. Computers &amp; Geosciences. 104 (2017) pp.151-157. <a href="http://dx.doi.org/10.1016/j.cageo.2016.08.003">http://dx.doi.org/10.1016/j.cageo.2016.08.003</a></p><h2 id="12">Author Info</h2><p>This function and supporting documentation were written by Chad A. Greene of NASA Jet P,,ropulsion Laboratory, October 2020.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |melt_interp_adusumilli| documentation
+% |melt_interp_adusumilli| interpolates ice shelf melt rate data from <https://library.ucsd.edu/dc/object/bb0448974g 
+% Adusumilli et al., 2020>.
+% 
+%% Syntax
+% 
+%  mi = melt_interp_adusumilli(lati,loni)
+%  mi = melt_interp_adusumilli(xi,yi)
+%  mi = melt_interp_adusumilli(...,'antialias',wavelength)
+% 
+%% Description
+% 
+% |mi = melt_interp_adusumilli(lati,loni)| interpolates the composite melt rates
+% (representing the years 2010-2018) at the geographic locations |lati,loni|. 
+% 
+% |mi = melt_interp_adusumilli(xi,yi)| as above, but for the query points |xi,yi|
+% in south polar stereographic meters. 
+%
+% |mi = melt_interp_adusumilli(...,'antialias',wavelength)| performs spatial
+% antialiasing before interpolation. This option is provided because the raw
+% data is distributed at 500 m resolution, but you may be interpolating to a 
+% coarser resolution grid. For antialiasing, a decent rule of thumb is to 
+% lowpass filter to a wavelength of twice the resolution of the query grid. 
+% In other words, if you are interpolating to a 3 km grid, use |6000| as the 
+% |wavelength| value to meet Nyquist. The antialiasing option uses the |filt2| 
+% function from Climate Data Toolbox, and may take a couple seconds to compute. 
+%
+%% Requirements 
+% * The 500 m resolution static grid requires Antarctic iceshelf melt rate data 
+% which can be found at the <https://library.ucsd.edu/dc/object/bb0448974g UCSD
+% repository> under the Components heading. 
+% * The timeseries data requires the Antarctic iceshelf height change data 
+% from the <https://library.ucsd.edu/dc/object/bb0448974g UCSD
+% repository> under the Components heading. But the time series does not actually
+% contain melt rates. 
+% * To anti-alias ice shelf before interpolation , this function
+% also requires (<https://github.com/chadagreene/CDT Climate Data Tools for Matlab>.
+% 
+%% Example 1a: A grid
+% Suppose you want a 5 km resolution grid of melt rates for Getz Ice Shelf. 
+% We'll start by defining a 600 km wide grid, at 5 km resolution, with the |psgrid| 
+% function rom Antarctic Mapping Tools. 
+
+% Define a grid:
+[lat,lon] = psgrid('Getz Ice Shelf',600,5);
+
+% Interpolate: 
+m = melt_interp_adusumilli(lat,lon); 
+
+% Map it: 
+figure
+pcolorps(lat,lon,m)
+axis tight off
+bedmachine % draws a coastline for context 
+modismoaps('contrast','white') % background image
+cb = colorbar;
+caxis([-1 1]*10)
+cmocean bal
+scalebarps('color','w')
+
+%% Example 1b: Antialiased grid
+% Now do the same as above, but apply a 10 km lowpass filter to antialias 
+% before interpolating from the 500 m grid to the 5 km grid. The antialiasing 
+% filter takes about 10 seconds on my laptop. 
+
+% Interpolate: 
+ma = melt_interp_adusumilli(lat,lon,'antialias',10e3); 
+
+% Map it: 
+figure
+pcolorps(lat,lon,ma)
+axis tight off
+bedmachine % draws a coastline for context 
+modismoaps('contrast','white') % background image
+cb = colorbar;
+caxis([-1 1]*10)
+cmocean bal
+scalebarps('color','w')
+
+%% 
+% The antialiased map above looks very similar to the aliased version, albeit
+% with a tiny bit less noise. My personal take is that the proper way to interpolate 
+% from a high-resolution grid to a low-resolution grid is to perform antialiasing; 
+% however, if my results change dramatically with versus without antialiasing, 
+% my findings probably aren't that meaningful. 
+
+%% Example 2: Melt rates along a profile
+% Let's look at the melt rate along a flowline of Pine Island Glacier. Start
+% with this map for context: 
+
+figure
+mapzoomps 'pine island glacier'
+itslive_imagesc % plots ice speed
+
+%% 
+% After plotting the map above, I used the |coord| function to get the 
+% coordinates (-1581526,-196704) of a grounded spot in the main trunk of PIG. 
+% I'll use that as a starting point to make a flowline: 
+
+[xi,yi,di] = itslive_flowline(-1581526,-196704);
+
+hold on
+plot(xi,yi,'r','linewidth',2)
+
+%% 
+
+figure
+bedmachine_profile(xi,yi)
+axis([900 995 -1400 300])
+
+%% 
+
+% Get basal meltrates along the flowline
+mi = melt_interp_adusumilli(xi,yi); 
+
+bi = bedmachine_interp('base',xi,yi); 
+
+hold on
+scatter(di{1},bi,30,mi,'filled')
+cb = colorbar;
+ylabel(cb,'melt rate (m/yr)')
+cmocean thermal % colormap
+
+%% Citing this data
+% Please cite Susheel's dataset if you use this data! Also, this function does operate on
+% the data, so if you don't mind, please also cite Antarctic Mapping Tools. 
+% 
+% Adusumilli, Susheel; Fricker, Helen A.; Medley, Brooke C.; Padman, Laurie; Siegfried, 
+% Matthew R. (2020). Data from: Interannual variations in meltwater input to the Southern
+% Ocean from Antarctic ice shelves. UC San Diego Library Digital Collections.
+% <https://doi.org/10.6075/J04Q7SHT>
+% 
+% Greene, C. A., Gwyther, D. E., & Blankenship, D. D. Antarctic Mapping Tools for Matlab. 
+% Computers & Geosciences. 104 (2017) pp.151-157. 
+% <http://dx.doi.org/10.1016/j.cageo.2016.08.003>
+% 
+%% Author Info
+% This function and supporting documentation were written by Chad A. Greene
+% of NASA Jet P,,ropulsion Laboratory, October 2020. 
+##### SOURCE END #####
+--></body></html>

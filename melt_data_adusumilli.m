@@ -19,10 +19,9 @@ function [M,x,y,t] = melt_data_adusumilli(varargin)
 % 1992 to 2018, then converts to melt rates. It's important to note that Adusumilli's 
 % dataset does not actually contain a timeseries of melt rates, so this function
 % uses the ITS_LIVE velocity mosaic and BedMachine ice thickness to account for 
-% divergence (which I'm calculating as constant through time despite evidence
+% divergence (which I calculated as constant through time despite possible evidence
 % to the contrary). The output variable t is in Matlab's datenum format, which 
-% is the number of days since the strike of midnight of the year zero. Note 
-% that the timeseries calculation does take some time (about four seconds on my laptop).
+% is the number of days since the strike of midnight of the year zero. 
 % 
 %% Examples
 % 
@@ -70,6 +69,7 @@ function [M,x,y,t] = melt_data_adusumilli(varargin)
 % This function and supporting documentation were written by Chad A. Greene
 % of NASA Jet Propulsion Laboratory, October 2020. 
 % 
+% See also melt_interp_adusumilli.
 
 %% Parse inputs 
 
@@ -132,22 +132,48 @@ if ~load2d
    dHdt = rect2cube(dHdt2,isf); % gets it back into shape.
    
    % Calculate ice divergence: 
-   % So far we only have H, which is a thickness *anomaly*, but for the divergence 
-   % calculation we need actual thickness. Ideally we would use a time-varying
-   % thickness and time-varying velocity, but in this function we will just 
-   % assume they're constant. Also, it would be ideal to load the full resolution
-   % bedmachine and itslive datasets, then lowpass filter such as with the filt2
-   % function before interpolating to Susheel's 10 km grid, but any potential
-   % spatial aliasing would only manifest as a small constant offset in the 
-   % time series of melt rates for any given location. 
-   
-   H0 = bedmachine_interp('thickness',X,Y); 
-   vx = itslive_interp('vx',X,Y); 
-   vy = itslive_interp('vy',X,Y); 
+   % Ideally we would use a time-varying thickness and time-varying velocity, 
+   % but in this function we will just assume they're constant. The divergence
+   % calculation appears at the bottom of this function, for reference. 
 
-   % Including thickness and velocity in the divergence term accounts for both advection and stretching:  
-   div = divergence(X,Y,H0.*vx,H0.*vy); 
+   D = load('divergence_adusumilli_grid.mat'); 
    
-   M = -(dHdt - SMB + div);
+   M = -(dHdt - SMB + D.div);
 
 end
+
+%% Divergence Calculation
+% This calculation takes about three minutes on my laptop, and it also requires
+% BedMachine data, my BedMachine functions, ITS_LIVE velocity data, my ITS_LIVE 
+% functions, and Climate Data Toolbox for Matlab. Rather than require users 
+% to do all that, it's faster and easier just to save the filtered divergence
+% grid and load it as needed. 
+% 
+% % 10 km grid points: 
+% fn = 'bb0448974g_2_1.h5';
+% X = h5read(fn,'/x')'; 
+% Y = flipud(h5read(fn,'/y')'); 
+%    
+% % Load velocity and thickness datasets: 
+% vx = itslive_data('vx'); 
+% [vy,xi,yi] = itslive_data('vy'); 
+% [H0,xb,yb] = bedmachine_data('thickness'); 
+% 
+% % Lowpass filter and interpolate to Susheel's grid: (Lowpass filter first to 2*res = 20e3 m:  
+% vx_lp = filt2(vx,diff(xi(1:2)),20e3,'lp'); % filt2 is in the Climate Data Toolbox for Matlab
+% vy_lp = filt2(vy,diff(xi(1:2)),20e3,'lp'); 
+% H0_lp = filt2(H0,diff(xb(1:2)),20e3,'lp'); 
+% 
+% % Intepolate: 
+% H0s = interp2(xb,yb,H0_lp,X,Y); 
+% vxs = interp2(xi,yi,vx_lp,X,Y); 
+% vys = interp2(xi,yi,vy_lp,X,Y); 
+% 
+% % Calculate divergence:
+% % Including thickness and velocity in the divergence term accounts for both advection and stretching:  
+% div = divergence(X,Y,H0s.*vxs,H0s.*vys); 
+% 
+% readme = 'anti-aliased divergence pattern for calculating melt rates from dH/dt rates. Find the calculation at the bottom of the melt_data_adusumilli function.'; 
+% 
+% save('divergence_adusumilli_grid.mat','X','Y','div','readme')
+

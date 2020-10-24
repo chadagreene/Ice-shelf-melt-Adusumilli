@@ -20,10 +20,9 @@
 % 1992 to 2018, then converts to melt rates. It's important to note that Adusumilli's 
 % dataset does not actually contain a timeseries of melt rates, so this function
 % uses the ITS_LIVE velocity mosaic and BedMachine ice thickness to account for 
-% divergence (which I'm calculating as constant through time despite evidence
+% divergence (which I calculated as constant through time despite possible evidence
 % to the contrary). The output variable |t| is in Matlab's datenum format, which 
-% is the number of days since the strike of midnight of the year zero. Note 
-% that the timeseries calculation does take some time (about four seconds on my laptop).
+% is the number of days since the strike of midnight of the year zero. 
 % 
 %% Requirements 
 % * The 500 m resolution static grid requires Antarctic iceshelf melt rate data 
@@ -32,13 +31,7 @@
 % * The timeseries data requires the Antarctic iceshelf height change data 
 % from the <https://library.ucsd.edu/dc/object/bb0448974g UCSD
 % repository> under the Components heading. But the time series does not actually
-% contain melt rates. To convert ice shelf surface heights to melt rates, this function
-% also requires: 
-% * <https://www.mathworks.com/matlabcentral/fileexchange/69159-bedmachine BedMachine functions>, 
-% * <https://nsidc.org/data/nsidc-0756 BedMachine data>, 
-% * <https://github.com/chadagreene/ITS_LIVE ITS_LIVE functions>, 
-% * <https://its-live.jpl.nasa.gov/ ITS_LIVE velocity mosaic data>, and 
-% * <https://github.com/chadagreene/CDT Climate Data Tools for Matlab>.
+% contain melt rates. 
 % 
 %% Example 1: 
 % Make a map of basal melt rates. This example uses |imagescn| from the 
@@ -140,6 +133,9 @@ bedmachine % plots coastlines for context
 % volume of ice per year, per grid cell. Multiply volume by the density of ice 
 % (917 kg/m^3) to then get mass rate in kg/yr. Multiply that by 1e-12 to 
 % convert kg/yr to Gt/yr. 
+% 
+% Notice we're plotting the one-year (four datapoints at 3 month resolution)
+% because on shorter timescales the gradients are pretty noisy. 
 
 massrate_getz = local(M,mask,@sum,'omitnan')*10e3^2*917*1e-12;
 

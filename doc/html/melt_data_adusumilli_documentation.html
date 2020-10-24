@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>melt_data_adusumilli documentation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-22"><meta name="DC.source" content="melt_data_adusumilli_documentation.m"><style type="text/css">
+      --><title>melt_data_adusumilli documentation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-24"><meta name="DC.source" content="melt_data_adusumilli_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,7 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
   </style></head><body><div class="content"><h1><tt>melt_data_adusumilli</tt> documentation</h1><!--introduction--><p><tt>melt_data_adusumilli</tt> loads ice shelf melt rate data from <a href="https://library.ucsd.edu/dc/object/bb0448974g">Adusumilli et al., 2020</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Requirements</a></li><li><a href="#4">Example 1:</a></li><li><a href="#6">Example 2: Time series data</a></li><li><a href="#7">Map of melt rate trends</a></li><li><a href="#8">Plot a time series of meltwater production</a></li><li><a href="#11">Citing this data</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[M,x,y] = melt_data_adusumilli
-[M,x,y,t] = melt_data_adusumilli('timeseries')</pre><h2 id="2">Description</h2><p><tt>[M,x,y] = melt_data_adusumilli</tt> loads the 500 m resolution <tt>w_b</tt> mosaic of basal meltrates (m/yr) that spans 2010-2018. Missing data are filled with the w_b_interp variable, which assumes a depth-dependent melt rate that was calculated separately for each ice shelf. Output variables <tt>x</tt> and <tt>y</tt> are in polar stereographic (ps71) meters.</p><p><tt>[M,x,y,t] = melt_data_adusumilli('timeseries')</tt> loads the 10 km resolution, quarterly (four times a year) data cube of surface elevation anomalies from 1992 to 2018, then converts to melt rates. It's important to note that Adusumilli's dataset does not actually contain a timeseries of melt rates, so this function uses the ITS_LIVE velocity mosaic and BedMachine ice thickness to account for divergence (which I'm calculating as constant through time despite evidence to the contrary). The output variable <tt>t</tt> is in Matlab's datenum format, which is the number of days since the strike of midnight of the year zero. Note that the timeseries calculation does take some time (about four seconds on my laptop).</p><h2 id="3">Requirements</h2><div><ul><li>The 500 m resolution static grid requires Antarctic iceshelf melt rate data which can be found at the <a href="https://library.ucsd.edu/dc/object/bb0448974g">UCSD repository</a> under the Components heading.</li><li>The timeseries data requires the Antarctic iceshelf height change data from the <a href="https://library.ucsd.edu/dc/object/bb0448974g">UCSD repository</a> under the Components heading. But the time series does not actually contain melt rates. To convert ice shelf surface heights to melt rates, this function also requires:</li><li><a href="https://www.mathworks.com/matlabcentral/fileexchange/69159-bedmachine">BedMachine functions</a>,</li><li><a href="https://nsidc.org/data/nsidc-0756">BedMachine data</a>,</li><li><a href="https://github.com/chadagreene/ITS_LIVE">ITS_LIVE functions</a>,</li><li><a href="https://its-live.jpl.nasa.gov/">ITS_LIVE velocity mosaic data</a>, and</li><li><a href="https://github.com/chadagreene/CDT">Climate Data Tools for Matlab</a>.</li></ul></div><h2 id="4">Example 1:</h2><p>Make a map of basal melt rates. This example uses <tt>imagescn</tt> from the Climate Data Toolbox (Greene et al., 2019), which is just a version of <tt>imagesc</tt> that makes NaNs transprent. Also the <tt>bedmachine</tt> function draws gounding lines for context, and <tt>cmocean</tt> sets a divergent colormap.</p><pre class="codeinput">[M,x,y] = melt_data_adusumilli;
+[M,x,y,t] = melt_data_adusumilli('timeseries')</pre><h2 id="2">Description</h2><p><tt>[M,x,y] = melt_data_adusumilli</tt> loads the 500 m resolution <tt>w_b</tt> mosaic of basal meltrates (m/yr) that spans 2010-2018. Missing data are filled with the w_b_interp variable, which assumes a depth-dependent melt rate that was calculated separately for each ice shelf. Output variables <tt>x</tt> and <tt>y</tt> are in polar stereographic (ps71) meters.</p><p><tt>[M,x,y,t] = melt_data_adusumilli('timeseries')</tt> loads the 10 km resolution, quarterly (four times a year) data cube of surface elevation anomalies from 1992 to 2018, then converts to melt rates. It's important to note that Adusumilli's dataset does not actually contain a timeseries of melt rates, so this function uses the ITS_LIVE velocity mosaic and BedMachine ice thickness to account for divergence (which I calculated as constant through time despite possible evidence to the contrary). The output variable <tt>t</tt> is in Matlab's datenum format, which is the number of days since the strike of midnight of the year zero.</p><h2 id="3">Requirements</h2><div><ul><li>The 500 m resolution static grid requires Antarctic iceshelf melt rate data which can be found at the <a href="https://library.ucsd.edu/dc/object/bb0448974g">UCSD repository</a> under the Components heading.</li><li>The timeseries data requires the Antarctic iceshelf height change data from the <a href="https://library.ucsd.edu/dc/object/bb0448974g">UCSD repository</a> under the Components heading. But the time series does not actually contain melt rates.</li></ul></div><h2 id="4">Example 1:</h2><p>Make a map of basal melt rates. This example uses <tt>imagescn</tt> from the Climate Data Toolbox (Greene et al., 2019), which is just a version of <tt>imagesc</tt> that makes NaNs transprent. Also the <tt>bedmachine</tt> function draws gounding lines for context, and <tt>cmocean</tt> sets a divergent colormap.</p><pre class="codeinput">[M,x,y] = melt_data_adusumilli;
 
 figure
 imagescn(x,y,M)
@@ -112,7 +112,7 @@ mask = isiceshelf(X,Y,<span class="string">'Getz'</span>);
 figure
 imagescn(x,y,mask)
 bedmachine <span class="comment">% plots coastlines for context</span>
-</pre><img vspace="5" hspace="5" src="melt_data_adusumilli_documentation_05.png" alt=""> <p>Perfect. Above we have a yellow pixel for each of the 10 km grid cells inside the boundaries of Getz Ice Shelf.</p><p>The <tt>local</tt> function in the Climate Data Toolbox is the easiest way to use that mask to make a time series. The only hard part in this process will be converting ice melt rate (m/yr) into total mass rate (Gt/yr). To do that, multiply each grid cell by its area (10e3^2 meters), which gives volume of ice per year, per grid cell. Multiply volume by the density of ice (917 kg/m^3) to then get mass rate in kg/yr. Multiply that by 1e-12 to convert kg/yr to Gt/yr.</p><pre class="codeinput">massrate_getz = local(M,mask,@sum,<span class="string">'omitnan'</span>)*10e3^2*917*1e-12;
+</pre><img vspace="5" hspace="5" src="melt_data_adusumilli_documentation_05.png" alt=""> <p>Perfect. Above we have a yellow pixel for each of the 10 km grid cells inside the boundaries of Getz Ice Shelf.</p><p>The <tt>local</tt> function in the Climate Data Toolbox is the easiest way to use that mask to make a time series. The only hard part in this process will be converting ice melt rate (m/yr) into total mass rate (Gt/yr). To do that, multiply each grid cell by its area (10e3^2 meters), which gives volume of ice per year, per grid cell. Multiply volume by the density of ice (917 kg/m^3) to then get mass rate in kg/yr. Multiply that by 1e-12 to convert kg/yr to Gt/yr.</p><p>Notice we're plotting the one-year (four datapoints at 3 month resolution) because on shorter timescales the gradients are pretty noisy.</p><pre class="codeinput">massrate_getz = local(M,mask,@sum,<span class="string">'omitnan'</span>)*10e3^2*917*1e-12;
 
 figure
 plot(t,movmean(massrate_getz,4))
@@ -144,10 +144,9 @@ ylabel(<span class="string">'Getz meltwater production (Gt/yr)'</span>)
 % 1992 to 2018, then converts to melt rates. It's important to note that Adusumilli's 
 % dataset does not actually contain a timeseries of melt rates, so this function
 % uses the ITS_LIVE velocity mosaic and BedMachine ice thickness to account for 
-% divergence (which I'm calculating as constant through time despite evidence
+% divergence (which I calculated as constant through time despite possible evidence
 % to the contrary). The output variable |t| is in Matlab's datenum format, which 
-% is the number of days since the strike of midnight of the year zero. Note 
-% that the timeseries calculation does take some time (about four seconds on my laptop).
+% is the number of days since the strike of midnight of the year zero. 
 % 
 %% Requirements 
 % * The 500 m resolution static grid requires Antarctic iceshelf melt rate data 
@@ -156,13 +155,7 @@ ylabel(<span class="string">'Getz meltwater production (Gt/yr)'</span>)
 % * The timeseries data requires the Antarctic iceshelf height change data 
 % from the <https://library.ucsd.edu/dc/object/bb0448974g UCSD
 % repository> under the Components heading. But the time series does not actually
-% contain melt rates. To convert ice shelf surface heights to melt rates, this function
-% also requires: 
-% * <https://www.mathworks.com/matlabcentral/fileexchange/69159-bedmachine BedMachine functions>, 
-% * <https://nsidc.org/data/nsidc-0756 BedMachine data>, 
-% * <https://github.com/chadagreene/ITS_LIVE ITS_LIVE functions>, 
-% * <https://its-live.jpl.nasa.gov/ ITS_LIVE velocity mosaic data>, and 
-% * <https://github.com/chadagreene/CDT Climate Data Tools for Matlab>.
+% contain melt rates. 
 % 
 %% Example 1: 
 % Make a map of basal melt rates. This example uses |imagescn| from the 
@@ -264,6 +257,9 @@ bedmachine % plots coastlines for context
 % volume of ice per year, per grid cell. Multiply volume by the density of ice 
 % (917 kg/m^3) to then get mass rate in kg/yr. Multiply that by 1e-12 to 
 % convert kg/yr to Gt/yr. 
+% 
+% Notice we're plotting the one-year (four datapoints at 3 month resolution)
+% because on shorter timescales the gradients are pretty noisy. 
 
 massrate_getz = local(M,mask,@sum,'omitnan')*10e3^2*917*1e-12;
 
